@@ -1,13 +1,23 @@
-from fastapi import FastAPI
+import asyncio
 
-app = FastAPI()
+from aiogram import Bot, Dispatcher
+from aiogram.filters import CommandStart
+from aiogram.types import Message
+
+from config import settings
+
+dp = Dispatcher()
 
 
-@app.get("/")
-async def root():
-    return {"message": "Hello World"}
+@dp.message(CommandStart())
+async def cmd_start(message: Message) -> None:
+    await message.answer("Бот запущен")
 
 
-@app.get("/hello/{name}")
-async def say_hello(name: str):
-    return {"message": f"Hello {name}"}
+async def main() -> None:
+    bot = Bot(token=settings.bot_token.get_secret_value())
+    await dp.start_polling(bot)
+
+
+if __name__ == "__main__":
+    asyncio.run(main())
