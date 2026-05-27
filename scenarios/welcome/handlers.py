@@ -1,7 +1,7 @@
 from aiogram import Router
-from aiogram.filters import CommandStart
 from aiogram.types import Message
-from scenarios.welcome.texts import START_TEXT
+from aiogram.filters import CommandStart
+from scenarios.welcome.text import START_TEXT
 
 router = Router(name="welcome")
 
