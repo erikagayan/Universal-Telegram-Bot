@@ -1,17 +1,12 @@
 import asyncio
 
 from aiogram import Bot, Dispatcher
-from aiogram.filters import CommandStart
-from aiogram.types import Message
 
 from config import settings
+from scenarios.welcome import router as welcome_router
 
 dp = Dispatcher()
-
-
-@dp.message(CommandStart())
-async def cmd_start(message: Message) -> None:
-    await message.answer("Бот запущен")
+dp.include_router(welcome_router)
 
 
 async def main() -> None:
